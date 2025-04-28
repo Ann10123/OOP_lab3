@@ -1,0 +1,26 @@
+<Window x:Class="OOP3_2_.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OOP3_2_"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="800">
+
+    <Grid>
+        <Canvas>
+            <Label Content="Від:" FontSize="18" Canvas.Left="75" Canvas.Top="40"/>
+            <TextBox x:Name="TextBoxInput1" FontSize="20" TextAlignment="Right" Width="150" Canvas.Left="25" Canvas.Top="75"/>
+            <Label Content="До:" FontSize="18" Canvas.Left="265" Canvas.Top="40"/>
+            <TextBox x:Name="TextBoxInput2" FontSize="20" TextAlignment="Right" Width="150" Canvas.Left="210" Canvas.Top="75"/>
+            <Label Content="З кроком:" FontSize="18" Canvas.Left="425" Canvas.Top="40"/>
+            <TextBox x:Name="TextBoxInput3" FontSize="20" TextAlignment="Right" Width="150" Canvas.Left="395" Canvas.Top="75"/>
+            <Label Content="А чи не вилучити мені всі кнопки,кратні..." FontSize="18" Canvas.Left="25" Canvas.Top="150"/>
+            <TextBox x:Name="TextBoxInput4" FontSize="20" TextAlignment="Right" Width="150" Canvas.Left="395" Canvas.Top="150"/>
+            <Button Content ="Треба більше кнопок!" FontSize="15" Width="200" Height="40" Canvas.Top="70" Canvas.Left="570" Click="More_Buttons"/>
+            <Button Content="Вилучити" FontSize="15" Width="150" Height="40" Canvas.Top="145" Canvas.Left="595"/>
+            <Line X1="0" Y1="225" X2="800" Y2="225" Stroke="Black" StrokeThickness="1"/>
+            <WrapPanel x:Name="MyWrapPanel" Orientation="Horizontal" Canvas.Top="235" Canvas.Left="4" Width="800"/>
+        </Canvas>
+    </Grid>
+</Window>
