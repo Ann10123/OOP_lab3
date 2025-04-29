@@ -30,16 +30,25 @@ namespace OOP3_2_
                 int.TryParse(TextBoxInput2.Text, out int to) &&
                 int.TryParse(TextBoxInput3.Text, out int through))
             {
-                for (int i = from; i <= to; i += through)
+                if (to >= 1 && to / through <= 10000 && through >= 1)
                 {
-                    Button btn = new Button { Content = $"{i}", Margin = new Thickness(5), Width = 50, Height = 20 };
-                    btn.Click += Message_Click;
-                    MyWrapPanel.Children.Add(btn);
+                    for (int i = from; i <= to; i += through)
+                    {
+                        Button btn = new Button { Content = $"{i}", Margin = new Thickness(5), Width = 45, Height = 20};
+                        btn.Background = Brushes.LightPink;
+                        btn.Click += Message_Click;
+                        MyWrapPanel.Children.Add(btn);
+                        btn.Tag = false;
+                    }
                 }
-            }
-            else
-            {
-                MessageBox.Show("Будь ласка, введіть коректні числа.");
+                else if (to / through > 10000)
+                {
+                    MessageBox.Show($"Я не буду створювати {to / through} кнопок!");
+                }
+                else
+                {
+                    MessageBox.Show($"Введіть коректні числа!");
+                }
             }
         }
         public void Message_Click(object sender, RoutedEventArgs e)
@@ -53,13 +62,56 @@ namespace OOP3_2_
                     int divisor = IsPrime(number);
                     if (divisor == -1)
                     {
-                        MessageBox.Show($"Число просте!");
+                        if (clickedButton.Tag is bool wasClicked && wasClicked)
+                        {
+                            MessageBox.Show($"Скільки можна питати те саме, число {number} просте!");
+                            return;
+                        }
+                        else 
+                        {
+                            MessageBox.Show($"Число просте!");
+                        }
+                        clickedButton.Tag = true;
                     }
                     else
                     {
-                        MessageBox.Show($"Число не просте, бо ділиться на {divisor}");
+                        if (clickedButton.Tag is bool wasClicked && wasClicked)
+                        {
+                            MessageBox.Show($"Скільки можна питати те саме, число {number} складене, бо ділиться на {divisor}!");
+                            return;
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Число {number} складене, бо ділиться на {divisor}!");
+                        }
+                        clickedButton.Tag = true;
                     }
                 }
+            }
+        }
+        public void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.TryParse(TextBoxInput4.Text, out int divisor) && divisor != 0)
+            {
+                var buttonsToDelete = new List<UIElement>();
+                foreach (UIElement button in MyWrapPanel.Children)
+                {
+                    if (button is Button btn && int.TryParse(btn.Content.ToString(), out int numb))
+                    {
+                        if (numb % divisor == 0)
+                        {
+                            buttonsToDelete.Add(button);
+                        }
+                    }
+                }
+                foreach (var btn in buttonsToDelete)
+                {
+                    MyWrapPanel.Children.Remove(btn);
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Число не може бути кратне 0!"); 
             }
         }
         private int IsPrime(int number)
